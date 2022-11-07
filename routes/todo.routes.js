@@ -45,10 +45,8 @@ router.post("/", async (req, res, next) => {
 
 })
 
-// GET "/api/todos/:id" => enviar todos los detalles de un ToDo por su id
+// GET "/api/todos/:todoId" => enviar todos los detalles de un ToDo por su id
 router.get("/:todoId", async (req, res, next) => {
-
-
 
   try {
     
@@ -62,6 +60,49 @@ router.get("/:todoId", async (req, res, next) => {
     next(error)
   }
 
+})
+
+
+// DELETE "/api/todos/:todoId" => borrar un documento de ToDo de la DB por su id
+router.delete("/:todoId", async (req, res, next) => {
+
+  try {
+
+    // borrar el documento por su id
+    await Todo.findByIdAndDelete(req.params.todoId)
+
+    // enviar respuesta al FE
+    res.status(200).json("todo bien, documento borrado")
+
+  } catch (error) {
+    next(error)
+  }
+
+})
+
+
+// PATCH "/api/todos/:todoId" => editar un documento de ToDo de la DB por su id
+router.patch("/:todoId", async (req, res, next) => {
+
+  // buscar los cambios a editar del documento
+  const todoUpdates = {
+    title: req.body.title,
+    description: req.body.description,
+    isUrgent: req.body.isUrgent
+  }
+
+  try {
+    
+    // editar el documento por su id
+    await Todo.findByIdAndUpdate(req.params.todoId, todoUpdates)
+    // recordamos, pasar 2 argumento. (el id, la info a actualizar)
+  
+    // enviar mensaje de "todo bien" al FE
+    res.status(200).json("todo bien, documento actualizado")
+
+  } catch (error) {
+    next(error)
+  }
 })
 
 

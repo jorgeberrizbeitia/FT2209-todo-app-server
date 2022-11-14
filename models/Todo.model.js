@@ -3,7 +3,12 @@ const mongoose = require("mongoose")
 const todoSchema = new mongoose.Schema({
   title: String,
   description: String,
-  isUrgent: Boolean
+  isUrgent: Boolean,
+  coordinates: [
+    {
+      type: Number
+    }
+  ]
 })
 
 const Todo = mongoose.model("Todo", todoSchema)

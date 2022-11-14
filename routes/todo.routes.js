@@ -49,7 +49,8 @@ router.post("/", async (req, res, next) => {
   const newTodo = {
     title: req.body.title,
     description: req.body.description,
-    isUrgent: req.body.isUrgent
+    isUrgent: req.body.isUrgent,
+    image: req.body.image
   }
 
   // usar esa informacion para crear un nuevo ToDo en la DB

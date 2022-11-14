@@ -13,4 +13,7 @@ router.get("/", (req, res, next) => {
 const todoRoutes = require("./todo.routes")
 router.use("/todos",todoRoutes)
 
+const uploadRoutes = require("./upload.routes")
+router.use("/upload", uploadRoutes)
+
 module.exports = router;

@@ -8,7 +8,8 @@ const todoSchema = new mongoose.Schema({
     {
       type: Number
     }
-  ]
+  ],
+  image: String
 })
 
 const Todo = mongoose.model("Todo", todoSchema)
